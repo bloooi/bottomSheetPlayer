@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="transparent">@android:color/transparent</color>
+
+    <color name="progress_secondary">#AAAAAA</color>
+    <color name="progress">@android:color/white</color>
+    <color name="colorPlayingTitle">#3F51B5</color>
+
+    <color name="active">#FF5252</color>
+    <color name="activeStart">#9736e6</color>
+    <color name="activeEnd">#4919de</color>
+
+    <color name="unselected">#9E9E9E</color>
+    <color name="black0">#212121</color>
+    <color name="black0_a50">#80212121</color>
+    <color name="black">#000000</color>
+    <color name="black_a65">#A6000000</color>
+    <color name="black_a30">#4D000000</color>
+    <color name="gray0">#757575</color>
+    <color name="gray0_a50">#80757575</color>
+    <color name="gray1">#A4A4A4</color>
+    <color name="gray2">#E0E0E0</color>
+    <color name="gray3">#eeeeee</color>
+    <color name="gray_info_title">#BABABA</color>
+    <color name="white">@android:color/white</color>
+    <color name="subscription_lite">#FFC364</color>
+    <color name="subscription_plus">#FF9852</color>
+    <color name="subscription_premium">#FF5252</color>
+
+    <color name="adPlaceHolderColor">#cdcdcd</color>
+
+    <color name="default_artist_background">#2C2C2C</color>
+    <color name="black_a50">#80000000</color>
+    <color name="white_a30">#4DFFFFFF</color>
+    <color name="white_a50">#80ffffff</color>
+    <color name="white_a60">#99FFFFFF</color>
+    <color name="white_a70">#B3FFFFFF</color>
+    <color name="gray_ca">#CACACA</color>
+    <color name="gray_53">#535353</color>
+    <color name="black_26">#262626</color>
+    <color name="black_17">#171717</color>
+    <color name="gray_subscription">#767778</color>
+    <color name="gray_follow">#88898A</color>
+
+    <color name="rewardStart">#E41C2F</color>
+    <color name="rewardEnd">#8C1D18</color>
+    <color name="cancel_red">#D30000</color>
+
+    <color name="activeStart_a50">#809736E6</color>
+    <color name="activeStart_a20">#339736E6</color>
+    <color name="activeEnd_a50">#804919DE</color>
+    <color name="player_background">#282827</color>
+    <color name="player_divider">#484847</color>
+</resources>

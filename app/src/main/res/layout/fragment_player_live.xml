@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="channelName"
+            type="String" />
+
+        <variable
+            name="channelImageUri"
+            type="String" />
+
+        <variable
+            name="channelId"
+            type="Long" />
+
+        <variable
+            name="subscriptionProductRuleID"
+            type="Integer" />
+
+        <variable
+            name="isFollow"
+            type="Boolean" />
+
+        <variable
+            name="isLike"
+            type="Boolean" />
+
+        <variable
+            name="likeCount"
+            type="String" />
+
+        <variable
+            name="totalAmount"
+            type="String" />
+
+        <variable
+            name="isMySelf"
+            type="Boolean" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/player_background"
+        android:clickable="true"
+        android:focusable="true"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/playerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/coverImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:actualImageScaleType="centerCrop"
+                app:failureImage="@drawable/default_cover"
+                app:failureImageScaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/loading_cover"
+                app:placeholderImageScaleType="centerCrop"
+                app:viewAspectRatio="1.777777" />
+
+
+            <View
+                android:id="@+id/livePlayerBlackBackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/black_a30"
+                app:layout_constraintTop_toTopOf="@id/coverImage"
+                app:layout_constraintBottom_toBottomOf="@id/coverImage"
+                app:layout_constraintStart_toStartOf="@id/coverImage"
+                app:layout_constraintEnd_toEndOf="@id/coverImage"
+                />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/livePlayerMenuLayout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <ImageButton
+                    android:id="@+id/liveMenuButton"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/more_32" />
+
+                <ImageButton
+                    android:id="@+id/liveTimerButton"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/timer_32" />
+
+                <ImageButton
+                    android:id="@+id/liveShareButton"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/share_32"
+                    />
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/live_player_close"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/arrow_down_32"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/informationExpandButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/drawer_close"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="@+id/playerLayout"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playerLayout">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/white"
+                app:tabMode="fixed"
+                app:tabPadding="0dp"
+                android:background="@color/gray_53"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/white_a60" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playerLayout">
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                app:expanded="false"
+                app:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/toolbarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentScrim="@color/transparent"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:titleEnabled="false">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray_53"
+                        android:elevation="4dp"
+                        android:layout_marginBottom="48dp"
+                        app:layout_collapseMode="none">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/informationLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/liveTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:lines="2"
+                                android:maxLines="2"
+                                android:padding="16dp"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="[Live] 잔나비 방송" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/interactiveContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/informationLayout"
+                            android:paddingBottom="16dp"
+                            >
+
+                            <LinearLayout
+                                android:id="@+id/donateContainer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/clapContainer">
+
+                                <ImageView
+                                    android:id="@+id/donationImage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:hapticFeedbackEnabled="true"
+                                    android:paddingStart="12dp"
+                                    android:paddingTop="8dp"
+                                    android:paddingEnd="12dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/donate_24" />
+
+                                <TextView
+                                    android:id="@+id/donationCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="@{totalAmount, default='0'}"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    tools:text="106K" />
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/rankContainer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:enabled="true"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/rankImage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:hapticFeedbackEnabled="true"
+                                    android:paddingStart="12dp"
+                                    android:paddingTop="8dp"
+                                    android:paddingEnd="12dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/rank_24" />
+
+                                <TextView
+                                    android:id="@+id/rankText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:gravity="center_horizontal"
+                                    android:hapticFeedbackEnabled="true"
+                                    android:paddingTop="3dp"
+                                    android:text="Top 20"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/clapContainer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:enabled="true"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/clapImage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:hapticFeedbackEnabled="true"
+                                    android:paddingStart="12dp"
+                                    android:paddingTop="8dp"
+                                    android:paddingEnd="12dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@{isLike ? @drawable/clap_selected : @drawable/clap, default=@drawable/clap}" />
+
+                                <TextView
+                                    android:id="@+id/clapCount"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:gravity="center_horizontal"
+                                    android:hapticFeedbackEnabled="true"
+                                    android:paddingTop="3dp"
+                                    android:text="@{likeCount, default= '0'}"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp"
+                                    tools:text="106K" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/channelLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/interactiveContainer"
+                            >
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/player_divider"
+                                app:layout_constraintBottom_toBottomOf="parent" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/player_divider"
+                                app:layout_constraintTop_toTopOf="parent" />
+                            <com.facebook.drawee.view.SimpleDraweeView
+                                android:id="@+id/ChannelImage"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                app:circleImage="@{true}"
+                                app:imgUri="@{channelImageUri}"
+                                app:placeholderImage="@drawable/loading_artist"
+                                app:failureImage="@drawable/default_artist"
+                                app:actualImageScaleType="centerCrop"
+                                app:placeholderImageScaleType="centerInside"
+                                app:failureImageScaleType="centerInside"
+                                android:background="@drawable/bg_circle_default_artist"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
+                                app:layout_constraintStart_toEndOf="@+id/ChannelImage"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="@{channelName}"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:text="Famous Channel" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraintLayout3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <View
+                                    android:id="@+id/followButton"
+                                    android:layout_width="108dp"
+                                    android:layout_height="32dp"
+                                    android:background="@{isFollow ? @drawable/bg_border_button : @drawable/bg_border_active_button, default=@drawable/bg_border_active_button}"
+                                    android:alpha="@{isMySelf ? 0.3f : 1.0f, default = 1.0}"
+                                    android:clickable="@{isMySelf ? false : true, default = true}"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableEnd="@{isFollow ? @drawable/arrow_follow : @drawable/none, default=@drawable/none}"
+                                    android:gravity="center"
+                                    android:paddingBottom="1dp"
+                                    android:text="@{isFollow ? @string/following : @string/follow }"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintBottom_toBottomOf="@+id/followButton"
+                                    app:layout_constraintEnd_toEndOf="@+id/followButton"
+                                    app:layout_constraintStart_toStartOf="@+id/followButton"
+                                    app:layout_constraintTop_toTopOf="@+id/followButton"
+                                    android:alpha="@{isMySelf ? 0.3f : 1.0f, default = 1.0}"
+                                    tools:text="@string/follow" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fakeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <LinearLayout
+            android:id="@+id/chatLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/live_chat_donation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="@color/player_background"
+                >
+
+                <TextView
+                    android:id="@+id/live_chat_donation_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/donate_16"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:paddingStart="8dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:text="GIFT"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/coinPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/coin_14"
+                    android:drawableEnd="@drawable/arrow_right_12"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10코인" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/writingChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/player_background"
+                >
+
+                <EditText
+                    android:id="@+id/liveChatInputView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:minHeight="36dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@drawable/color_live_chat_input"
+                    android:background="@drawable/bg_chat_input"
+                    android:hint="Say Hi!"
+                    android:textColorHint="@color/white_a50"
+                    android:paddingStart="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/liveSendMessageButton"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <ImageButton
+                    android:id="@+id/liveSendMessageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_round_send_chat"
+                    android:rotation="90"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/liveChatInputView"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

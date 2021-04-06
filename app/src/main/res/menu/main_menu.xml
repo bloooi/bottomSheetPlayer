@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_tab"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/track_tab"
+        android:icon="@drawable/chart_24"
+        android:title="Track"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/none"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:enabled="false"
+        />
+
+    <item
+        android:id="@+id/feed_tab"
+        android:icon="@drawable/feed_24"
+        android:title="Feed"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/myPage_tab"
+        android:icon="@drawable/my_page_24"
+        android:title="My Page"
+        app:showAsAction="ifRoom" />
+</menu>
