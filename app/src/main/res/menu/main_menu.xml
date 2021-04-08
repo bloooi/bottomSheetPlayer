@@ -9,9 +9,10 @@
 
     <item
         android:id="@+id/track_tab"
-        android:icon="@drawable/chart_24"
+
         android:title="Track"
         app:showAsAction="ifRoom" />
+<!--    android:icon="@drawable/chart_24"-->
 
     <item android:id="@+id/none"
         android:title=""
@@ -21,13 +22,15 @@
 
     <item
         android:id="@+id/feed_tab"
-        android:icon="@drawable/feed_24"
+
         android:title="Feed"
         app:showAsAction="ifRoom" />
+<!--    android:icon="@drawable/feed_24"-->
 
     <item
         android:id="@+id/myPage_tab"
-        android:icon="@drawable/my_page_24"
+
         android:title="My Page"
         app:showAsAction="ifRoom" />
+<!--    android:icon="@drawable/my_page_24"-->
 </menu>
