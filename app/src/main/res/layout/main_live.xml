@@ -6,6 +6,7 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <fragment
+        android:elevation="10dp"
         android:id="@+id/liveContent"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         android:id="@+id/liveHandle"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:elevation="10dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +50,7 @@
             app:layout_constraintStart_toEndOf="@+id/liveImage"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tool:text="Live Name" />
+            android:text="Track Name" />
 
         <TextView
             android:id="@+id/liveChannel"
@@ -62,7 +64,7 @@
             app:layout_constraintEnd_toStartOf="@+id/liveCancel"
             app:layout_constraintStart_toEndOf="@+id/liveImage"
             app:layout_constraintTop_toBottomOf="@+id/liveName"
-            tool:text="Live channel name" />
+            android:text="Track Artist name" />
 
         <ImageView
             android:id="@+id/liveCancel"

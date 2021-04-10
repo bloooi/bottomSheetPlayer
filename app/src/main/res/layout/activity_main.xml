@@ -8,15 +8,30 @@
     android:layout_height="match_parent"
     >
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/openPlayerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Open Player"
+            android:elevation="0dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <include
         android:id="@+id/livePlayerView"
         layout="@layout/main_live"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="4dp"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        app:behavior_peekHeight="116dp"
         app:behavior_hideable="true"
+        app:behavior_peekHeight="116dp"
         />
 
 

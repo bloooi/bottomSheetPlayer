@@ -3,12 +3,14 @@ package com.jay.bottomsheetplayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jay.bottomsheetplayer.databinding.ActivityMainBinding
 import com.jay.bottomsheetplayer.util.DimensionConverter
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    internal lateinit var binding: ActivityMainBinding
     private val livePlayerBehavior: BottomSheetBehavior<View>? by lazy {
         BottomSheetBehavior.from(binding.livePlayerView.root)
     }
@@ -19,8 +21,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Fresco.initialize(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        findNavController(R.id.liveContent).apply {
+            graph = navInflater.inflate(R.navigation.nav_graph).apply {
+                startDestination = R.id.playerFragment
+            }
+        }
 
         livePlayerBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
 
@@ -38,23 +48,38 @@ class MainActivity : AppCompatActivity() {
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
-//                    BottomSheetBehavior.STATE_DRAGGING, BottomSheetBehavior.STATE_COLLAPSED -> viewModel().notifierManager.requestLoseLiveChatFocus()
-                    else -> return
+                    BottomSheetBehavior.STATE_HIDDEN -> {}
+                    else -> livePlayerBehavior?.isHideable = false
                 }
 
             }
         })
+
+
 
         binding.livePlayerView.liveHandle.setOnClickListener {
             livePlayerBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
         binding.livePlayerView.liveCancel.setOnClickListener {
+            livePlayerBehavior?.isHideable = true
             livePlayerBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
         binding.startLiveButton.setOnClickListener {
             livePlayerBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
         }
+
+        binding.openPlayerButton.setOnClickListener {
+            livePlayerBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+    override fun onBackPressed() {
+        if (livePlayerBehavior?.state == BottomSheetBehavior.STATE_EXPANDED) {
+            livePlayerBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+            return
+        }
+        super.onBackPressed()
     }
 }
